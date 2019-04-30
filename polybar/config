@@ -42,9 +42,9 @@ font-0 = Input Sans Thin:size=10;-1
 font-1 =SauceCodePro Nerd Font:size=8:antialias=false;-2
 font-2 = FontAwesome:size=10;0
  
-modules-left = i3
-modules-center =
-modules-right = filesystem volume battery wlan backlight Kbdbacklight date
+modules-left = i3 bspwm 
+modules-center = browsermediacontrol 
+modules-right = filesystem volume battery wlan backlight Kbdbacklight date 
  
 tray-position = right
 tray-padding = 2
@@ -98,7 +98,7 @@ type = internal/bspwm
  
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-underline= ${colors.foreground}
 label-focused-padding = 2
  
 label-occupied = %index%
@@ -111,11 +111,19 @@ label-urgent-padding = 2
 label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
+
+ws-icon-0 = I;
+ws-icon-1 = II;
+ws-icon-2 = III;
+ws-icon-3 = IV;
+ws-icon-4 = V;
+ws-icon-default = 
+
  
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
-#index-sort = true
+index-sort = true
 wrapping-scroll = false
  
 ws-icon-0 = 1;
@@ -153,7 +161,7 @@ label-visible-padding = ${self.label-focused-padding}
 label-urgent = %icon%
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
- 
+
 
 [module/wlan]
 type = internal/network
@@ -168,7 +176,6 @@ label-connected =  %essid%
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.foreground}
 label-disconnected =  
-click-left = exec -e wifish m
 
 [module/date]
 type = internal/date
@@ -281,3 +288,9 @@ label-foreground = ${colors.foreground}
 format-underline = ${colors.foreground}
 format-padding = 1
 animation-charging-framerate = 750
+
+[module/browsermediacontrol]
+type = custom/script
+exec = /home/ron/.config/polybar/browsermediacontrol
+interval = 0.1
+
