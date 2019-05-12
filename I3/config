@@ -20,6 +20,9 @@ bindsym $mod+Shift+q kill
 #Rofi launcher
 bindsym $mod+d exec --no-startup-id rofi -show run
 
+#dmenu launcher
+#bindsym $mod+d exec --no-startup-id dmenu_run -i -nb '#282a36' -nf '#bd93f9' -sb '#bd93f9' -sf '#44475a' -fn 'SourceCodePro Nerd Font:bold:pixelsize=14'
+
 
 # change focus
 bindsym $mod+h focus left
