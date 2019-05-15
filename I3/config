@@ -135,6 +135,8 @@ bindsym $mod+q exec --no-startup-id xclip -o | qrencode -o /home/ronnie/Pictures
 bindsym $mod+b exec --no-startup-id pcmanfm
 for_window [class="Pcmanfm"] floating enable resize set 753 448 #Start it in floating mode with defined location
 bindsym $mod+f exec --no-startup-id firefox
+bindsym $mod+p exec --no-startup-id ~/.config/i3/pmenu
+#bindsym $mod+w exec --no-startup-id ~/.config/i3/wifish
 
 #StartUp 
 exec --no-startup-id light -S 30 
