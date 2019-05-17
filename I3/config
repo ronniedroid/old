@@ -1,0 +1,224 @@
+###########################################################################
+#Ronnie's I3-gaps config
+###########################################################################
+
+#Mod key
+set $mod Mod4
+
+# Font for window titles
+font pango:SauceCodePro Nerd Font 10
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec --no-startup-id urxvt
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+#Rofi launcher
+bindsym $mod+d exec --no-startup-id rofi -show run -hide-scrollbar
+#Dmenu Launcher
+#bindsym $mod+d exec --no-startup-id dmenu_run -i -nb '#282a36' -nf '#bd93f9' -sb '#bd93f9' -sf '#44475a' -fn 'SourceCodePro Nerd Font:bold:pixelsize=14'
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+> split h
+
+# split in vertical orientation
+bindsym $mod+< split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+Shift+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space+f focus mode_toggle
+
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec ~/Scripts/exit.sh 
+ 
+###########################################
+#My Commands
+###########################################
+
+#Set Date
+exec --no-startup-id sudo date -s 5 +%d%m%y 
+
+# Start Wifish list and select an AP through Rofi
+bindsym $mod+w exec --no-startup-id ~/Scripts/wifish.sh
+
+#powermenu
+bindsym XF86PowerOff exec --no-startup-id ~/Scripts/i3pmenu.sh
+
+#To Activate the two-finger right click on MacBooks
+exec --no-startup-id synclient tapbutton2=3
+
+#Disable Titlebars
+new_window 1pixel
+
+#Take a screenshot and save it to a QR code in the Pictures folder
+bindsym $mod+q exec --no-startup-id xclip -o | qrencode -o /home/ronnie/Pictures/$(date '+%Y-%m-%d_%H-%M-%S').png 
+
+#App Shortcuts
+bindsym $mod+b exec --no-startup-id pcmanfm
+#for_window [class="Pcmanfm"] floating enable resize set 753 448 #Start it in floating mode with defined location
+bindsym $mod+f exec --no-startup-id firefox
+bindsym $mod+g exec --no-startup-id geary
+
+#StartUp 
+exec --no-startup-id light -S 30 
+exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+#Boarder Settings
+for_window [class="^.*"] border pixel 3 #Change boarder size
+hide_edge_borders both
+client.focused              #bd93f9 #bd93f9 #bd93f9 #bd93f9 
+
+#Keyboard Layouts
+
+#Toggle between us and ar layout
+
+bindsym $mod+space exec --no-startup-id ~/Scripts/kbdlayout.sh
+
+#show a list of available layouts
+
+bindsym $mod+Mod1+space exec  --no-startup-id ~/Scripts/kbdlayout2.sh
+
+#Gaps
+gaps inner 15
+gaps outer -5
+#smart_gaps on #No gaps if only one window opened
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec light -A 5    # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5    # decrease screen brightness
+
+# keyboard brightness controls
+bindsym XF86KbdBrightnessUp exec light -s sysfs/leds/smc::kbd_backlight -A 5    # increase Kbd brightness
+bindsym XF86KbdBrightnessDown exec light -s sysfs/leds/smc::kbd_backlight -U 5    # decrease Kbd brightness
+exec -no-startup-id light -s sysfs/leds/smc::kbd_backlight -S 0
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+
+
+
+
+
