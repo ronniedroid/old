@@ -1,0 +1,32 @@
+
+[global]
+alignment = center
+follow = keyboard
+frame_width = 2
+geometry = 288x5-7+30
+padding = 5
+font = SauceCodePro Nerd Font 13
+separator_color = "#bd93f9"    
+frame_color = "#bd93f9"
+word_wrap = true
+
+[shortcuts]
+close = ctrl+space
+close_all = ctrl+shift+space
+history = ctrl+grave
+context = ctrl+shift+period
+
+[urgency_low]
+background = "#282a36"
+foreground = "#93a1a1"
+timeout = 5
+
+[urgency_normal]
+background = "#282a36"
+foreground = "#93a1a1"
+timeout = 10
+
+[urgency_critical]
+background = "#282a36"
+foreground = "#93a1a1"
+timeout = 0
