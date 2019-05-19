@@ -43,7 +43,7 @@ font-1 =SauceCodePro Nerd Font:size=8:antialias=false;-2
 font-2 = FontAwesome:size=10;0
  
 modules-left = i3 bspwm 
-modules-center = browsermediacontrol 
+modules-center = 
 modules-right = filesystem volume battery wlan backlight Kbdbacklight date 
  
 tray-position = right
@@ -288,9 +288,3 @@ label-foreground = ${colors.foreground}
 format-underline = ${colors.foreground}
 format-padding = 1
 animation-charging-framerate = 750
-
-[module/browsermediacontrol]
-type = custom/script
-exec = /home/ron/.config/polybar/browsermediacontrol
-interval = 0.1
-
