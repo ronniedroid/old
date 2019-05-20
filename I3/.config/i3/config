@@ -128,7 +128,7 @@ exec --no-startup-id sudo date -s 5 +%d%m%y
 bindsym $mod+w exec --no-startup-id ~/Scripts/wifish.sh
 
 #powermenu
-bindsym XF86PowerOff exec --no-startup-id ~/Scripts/i3pmenu.sh
+bindsym $mod+p exec --no-startup-id ~/Scripts/i3pmenu.sh
 
 #To Activate the two-finger right click on MacBooks
 exec --no-startup-id synclient tapbutton2=3

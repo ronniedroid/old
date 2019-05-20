@@ -41,15 +41,18 @@ module-margin-right = 2
 font-0 = Input Sans Thin:size=10;-1
 font-1 =SauceCodePro Nerd Font:size=8:antialias=false;-2
 font-2 = FontAwesome:size=10;0
+
  
 modules-left = i3 bspwm 
-modules-center = 
-modules-right = filesystem volume battery wlan backlight Kbdbacklight date 
+modules-center = date 
+modules-right = filesystem volume battery wlan backlight Kbdbacklight xkeyboard 
  
 tray-position = right
 tray-padding = 2
 ;tray-transparent = true
 ;tray-background = #0063ff
+ 
+
  
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -72,15 +75,15 @@ blacklist-0 = num lock
  
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+format-prefix-underline = ${colors.foreground}
  
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
+label-layout-underline = ${colors.foreground}
  
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
+label-indicator-underline = ${colors.foreground}
  
 [module/filesystem]
 type = internal/fs
@@ -260,7 +263,7 @@ animation-charging-foreground = ${colors.foreground-alt}
 [module/backlight]
 type = custom/script
 interval = 0.2
-exec = /home/ron/.config/polybar/backlight.sh
+exec = ~/.config/polybar/backlight.sh
 
 scroll-up = exec light -A 5
 scroll-down = exec light -U 5
@@ -276,7 +279,7 @@ animation-charging-framerate = 750
 [module/Kbdbacklight]
 type = custom/script
 interval = 0.2
-exec = /home/ron/.config/polybar/Kbdbacklight.sh
+exec = ~/.config/polybar/kbdbacklight.sh
 
 scroll-up = exec light -s sysfs/leds/smc::kbd_backlight -A 5
 scroll-down = exec light -s sysfs/leds/smc::kbd_backlight -U 5
@@ -288,3 +291,6 @@ label-foreground = ${colors.foreground}
 format-underline = ${colors.foreground}
 format-padding = 1
 animation-charging-framerate = 750
+
+tray-position = right
+
