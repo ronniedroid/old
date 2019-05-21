@@ -115,7 +115,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec ~/Scripts/exit.sh 
+bindsym $mod+Shift+e exec ~/Scripts/i3exit.sh 
  
 ###########################################
 #My Commands
@@ -125,19 +125,19 @@ bindsym $mod+Shift+e exec ~/Scripts/exit.sh
 exec --no-startup-id sudo date -s 5 +%d%m%y 
 
 # Start Wifish list and select an AP through Rofi
-bindsym $mod+w exec --no-startup-id ~/Scripts/wifish.sh
+bindsym $mod+w exec --no-startup-id sudo connman_dmenu
 
 #powermenu
 bindsym $mod+p exec --no-startup-id ~/Scripts/i3pmenu.sh
 
 #To Activate the two-finger right click on MacBooks
-exec --no-startup-id synclient tapbutton2=3
+#exec --no-startup-id synclient tapbutton2=3
 
 #Disable Titlebars
 new_window 1pixel
 
 #Take a screenshot and save it to a QR code in the Pictures folder
-bindsym $mod+q exec --no-startup-id xclip -o | qrencode -o /home/ronnie/Pictures/$(date '+%Y-%m-%d_%H-%M-%S').png 
+bindsym $mod+q exec --no-startup-id xclip -o | qrencode -o ~/Pictures/$(date '+%Y-%m-%d_%H-%M-%S').png 
 
 #App Shortcuts
 bindsym $mod+b exec --no-startup-id pcmanfm

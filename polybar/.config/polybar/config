@@ -12,7 +12,7 @@ foreground-alt = #44475a
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
-red = dc322f
+red = #dc322f
  
 [bar/main]
 ;monitor = ${env:MONITOR:eDP-1}
@@ -36,11 +36,11 @@ padding-left = 0
 padding-right = 2
  
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 1
  
 font-0 = Input Sans Thin:size=10;-1
 font-1 =SauceCodePro Nerd Font:size=8:antialias=false;-2
-font-2 = FontAwesome:size=10;0
+font-2 = FontAwesome:size=30;0
 
  
 modules-left = i3 bspwm 
@@ -168,7 +168,7 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0b1
+interface = wlan0
 interval = 3.0
  
 format-connected = <label-connected>
@@ -291,6 +291,4 @@ label-foreground = ${colors.foreground}
 format-underline = ${colors.foreground}
 format-padding = 1
 animation-charging-framerate = 750
-
-tray-position = right
 

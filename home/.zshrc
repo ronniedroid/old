@@ -38,13 +38,11 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-alias i3conf="sudo vim ~/.config/i3/config"
-alias polyconf="sudo vim ~/.config/polybar/config"
-alias off="sudo poweroff"
-alias reboot="sudo reboot"
-alias bspc="sudo vim ~/.config/bspwm/bspwmrc"
-alias bspcx="sudo vim ~/.config/sxhkd/sxhkdrc"
-alias vim="sudo vim"
+alias vim="sudo nvim"
+alias i3conf="vim ~/.config/i3/config"
+alias polyconf="vim ~/.config/polybar/config"
+alias bspc="vim ~/.config/bspwm/bspwmrc"
+alias bspcx="vim ~/.config/sxhkd/sxhkdrc"
 alias c="~/.config/"
 alias s="~/Scripts/"
 alias d="~/Downloads/"
