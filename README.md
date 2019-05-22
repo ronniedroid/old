@@ -12,7 +12,7 @@ Sudo pacman -S git stow bspwm i3-gaps rofi polybar light yay
 **then do**
 
 ```
-yay -S ttf-font-awesome nerd-fonts-source-code-pro
+yay -S ttf-font-awesome nerd-fonts-source-code-pro i3lock-fancy-git
 ```
 
 You'll also need [Ant-Dracula theme](https://github.com/EliverLara/Ant-Dracula) , [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)  ,
