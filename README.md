@@ -6,7 +6,7 @@ If you are looking to get the same setup as mine you can do so by following thos
 **Dependencies**
 
 ```
-Sudo pacman -S git stow bspwm i3-gaps rofi polybar light yay
+Sudo pacman -S git stow bspwm sxhkd i3-gaps rofi polybar light yay
 ```
 
 **then do**
