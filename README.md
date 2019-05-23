@@ -1,6 +1,8 @@
 # DotFiles
 My config files
 
+<h3 align="center"><img src="data/icons/64/com.github.artemanufrij.trimdown.svg"/><br>
+
 If you are looking to get the same setup as mine you can do so by following those step
 
 **Dependencies**
