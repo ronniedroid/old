@@ -46,12 +46,22 @@ Note, these instaractions are for Arch-bases linux only, you can replucate this 
 
 **ScreenShots**
 
-Screenshots/KeyboardLayout.png
+<h3 align="center"><img src="Screenshots/one window.png
+"/><br>
+  
+<h3 align="center"><img src="Screenshots/Vim.png
+"/><br>
 
-Screenshots/Vim.png
+<h3 align="center"><img src="Screenshots/KeyboardLayout.png
+"/><br>
+ 
+<h3 align="center"><img src="Screenshots/PwerMenu.png
+"/><br>
+  
+<h3 align="center"><img src="Screenshots/Confirmation.Menu.png
+"/><br>
 
-Screenshots/one window.png
 
-Screenshots/PwerMenu.png
 
-Screenshots/Confirmation.Menu.png
+
+
