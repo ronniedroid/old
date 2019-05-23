@@ -1,7 +1,7 @@
 # DotFiles
 My config files
 
-<h3 align="center"><img src="data/icons/64/com.github.artemanufrij.trimdown.svg"/><br>
+<h3 align="center"><img src="Screenshots/Fullscreen.png"/><br>
 
 If you are looking to get the same setup as mine you can do so by following those step
 
@@ -40,4 +40,18 @@ stow home
 and so on...
 
 
-Note, this instaraction is for Arch-bases linux only, you can replucate this setup on other distros too, all you ahve to do is install the dependenies then follow the instarctions
+Note, these instaractions are for Arch-bases linux only, you can replucate this setup on other distros too, all you ahve to do is install the dependenies then follow the instarctions
+
+
+
+**ScreenShots**
+
+Screenshots/KeyboardLayout.png
+
+Screenshots/Vim.png
+
+Screenshots/one window.png
+
+Screenshots/PwerMenu.png
+
+Screenshots/Confirmation.Menu.png
