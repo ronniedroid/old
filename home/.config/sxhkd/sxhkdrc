@@ -1,0 +1,39 @@
+
+#Open Web Browser
+super + shift + f
+	firefox
+  
+  
+#pulse Audio controls
+
+XF86AudioRaiseVolume
+	pactl set-sink-volume 0 +10% #increase sound volume
+XF86AudioLowerVolume
+	pactl set-sink-volume 0 -10% #decrease sound volume
+XF86AudioMute
+	pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+
+XF86MonBrightnessUp
+	light -A 5    # increase screen brightness
+XF86MonBrightnessDown
+	light -U 5    # decrease screen brightness
+
+# keyboard brightness controls
+
+XF86KbdBrightnessUp
+	light -s sysfs/leds/smc::kbd_backlight -A 5    # increase Kbd brightness
+XF86KbdBrightnessDown 
+	light -s sysfs/leds/smc::kbd_backlight -U 5 # decrease Kbd brightness
+
+# Media player controls
+
+XF86AudioPlay
+	playerctl play
+XF86AudioPause
+	playerctl pause
+XF86AudioNext
+	playerctl next
+XF86AudioPrev
+playerctl previous
