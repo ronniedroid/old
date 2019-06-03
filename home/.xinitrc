@@ -31,7 +31,7 @@ Bat(){
 }
 
 Vol(){
-  Vol="$(amixer get Master | awk -F'[][]' 'END{ print "🔊 " $2 }')"
+  Vol="$(amixer get Master | awk -F'[][]' 'END{ print " 🔊 " $2 }')"
   echo "$Vol"
 }
 
