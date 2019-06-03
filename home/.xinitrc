@@ -40,8 +40,13 @@ BL(){
   echo "$BL"
 }
 
+KBL(){
+  KBL="$(setxkbmap -query | awk 'FNR>2 {print $2}')"
+  echo "$KBL"
+}
+
 while true; do
-     xsetroot -name "$(Vol) | $(BL) | $(Bat) | $(dte)"
+     xsetroot -name "$(Vol) | $(BL) | $(Bat) | $(dte) | $(KBL)"
      sleep 1s    # Update time every one seconds
 done &
 

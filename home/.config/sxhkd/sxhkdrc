@@ -2,7 +2,15 @@
 #Open Web Browser
 super + shift + f
 	firefox
-  
+
+# Power Menu
+super + p
+	~/Scripts/pmenu.sh
+
+#change layout
+
+super + alt + space
+	~/Scripts/kbdlayout.sh
   
 #pulse Audio controls
 
