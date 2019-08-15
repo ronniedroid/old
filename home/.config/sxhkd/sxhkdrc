@@ -1,5 +1,69 @@
+##I3
 
-#Open Web Browser
+# Go to, move windows to workspace
+super + {_,shift +} {1,2,3,4,5,6,7,8,9}
+	i3-msg {workspace,move container to workspace} {1,2,3,4,5,6,7,8,9}
+
+# Restart I3 inplace
+
+super + shift + r
+	i3-msg restart
+
+# Kill a window
+
+super + shift +q
+	i3-msg kill
+
+#Change Focus, move window
+super + {_,shift +} {h,j,k,l}
+	i3-msg {focus,move} {left,down,up,right}
+
+#Split horizontaly or virtically
+alt + {h,v}
+	i3-msg split {h,v}
+
+#enter fullscreen
+super + f
+	i3-msg fullscreen toggle
+
+#Change layout
+super + {s,w,e}
+	i3-msg layout {stacking,tabbed,toggle split}
+
+# Toggle Tiling/Floating
+
+super + shift + space
+	i3-msg floating toggle
+
+Change focus between tiling/floating
+super + space
+	i3-msg focus mode_toggle
+
+#focus parent container
+super + a
+	focus parent
+#focus child container
+super + c
+	focus child
+
+#exit i3 session
+super + shift + e
+	~/Scripts/exit.sh
+
+#Resize
+super + alt + {h,j,k,l}
+	i3-msg resize{shrink width 10 px,grow height 10 px,shrink height 10 px,grow width 10 px}
+
+
+#shortcuts
+
+super + d
+	rofi -show run
+
+super + Return
+	alacritty
+
+#open Web Browser
 super + shift + f
 	firefox
 
@@ -11,6 +75,9 @@ super + p
 
 super + alt + space
 	~/Scripts/kbdlayout.sh
+
+super + shift + w
+	~/Scripts/wifish.sh
   
 #pulse Audio controls
 
@@ -45,3 +112,4 @@ XF86AudioNext
 	playerctl next
 XF86AudioPrev
 playerctl previous
+

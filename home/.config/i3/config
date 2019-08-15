@@ -1,0 +1,51 @@
+# With great power comes great responsibility
+
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:SouceCodePro Nerd Font 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+#Start nm-applet
+exec --no-startup-id nm-applet
+
+#Start sxhkd
+exec --no-startup-id sxhkd
+
+#Start Nitrogen
+exec --no-startup-id nitrogen --restore
+
+#start compton
+exec --no-startup-id compton --config ~/.config/compton.conf -b
+
+#start Polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+#bar {
+#        status_command i3blocks
+#}
+
+# for the sake of keeping sxhkd working
+bindsym $mod+shift+control+adiaeresis focus left
+
+#gaps
+
+for_window [class="^.*"] border pixel 5 
+
+gaps inner 10
+gaps outer -4
+#smart_gaps on
+
+smart_borders on
+
+#  border colors
+ client.focused #00C1FF #00C1FF #000088 #00C1FF
+ client.unfocused #BF616A #BF616A #BF616A #BF616A
+
+ # class                 border  backgr. text
+ client.focused #A3BE8C #A3BE8C #A3BE8C

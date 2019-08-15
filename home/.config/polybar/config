@@ -1,0 +1,293 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+
+[colors]
+;background = ${xrdb:color0:#222}
+;nord 10
+background = #3b4252
+background-alt = #444
+background-desktop = #8fbcbb
+background-battery-nord = #81A1C1
+background-wlan-nord = #BF616A 
+background-cpu-nord = #D08770 
+background-memory-nord = #B48EAD
+background-volume-nord = #EBCB8B 
+;foreground = ${xrdb:color7:#222}
+;nord 6
+foreground = #ECEFF4 
+foreground-alt = #555
+primary = #ffb52a
+secondary = #81a1c1
+alert = #bf616a
+
+[hacks]
+;Allow padding of modules while keeping the formatted background colour we've set
+module-margin = "   "
+
+
+[bar/bar1]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 24
+;offset-x = 1%
+;offset-y = 50%
+radius = 0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-color = #88C0D0
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+;Usefull because some icons have weird heights
+font-0 = FontAwesome:size=10;1
+font-1 = FontAwesome:size=10;2
+font-2 = "Roboto Mono Bold for Powerline:size=10;1"
+font-3 = siji:pixelsize=10;1
+
+modules-left = i3
+modules-center = xwindow
+modules-right = xbacklight volume battery date wlan 
+
+tray-position = right
+tray-padding = 2
+;tray-transparent = true
+tray-background = #bf616a
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+label.forground = #81a1c1
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+format-prefix-background = ${colors.secondary}
+
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+label-layout-background = ${colors.secondary}
+
+
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+[module/i3]
+type = internal/i3
+format =<label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+enable-click = true
+enable-scroll = false
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background-desktop}
+label-focused-underline = ${colors.background-desktop}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = 
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0b1
+interval = 3.0
+format-connected = "  <label-connected>"
+label-connected = %essid%
+format-disconnected = "  WiFi Disconnected"
+format-connected-prefix = ${hacks.module-margin}
+format-connected-background=${colors.background-wlan-nord}
+format-disconnected-background=${colors.background-wlan-nord}
+format-connected-suffix = ${hacks.module-margin}
+format-disconnected-prefix = ${hacks.module-margin}
+format-disconnected-suffix = ${hacks.module-margin}
+connected-active-font=2 
+disconnected-active-font=2
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+
+[module/eth]
+type = internal/network
+interface = enp0s25
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = %H:%M 
+time-alt = %H:%M:%S  
+;have to manually insert module margins here
+format-prefix = "    "
+format-suffix = ${hacks.module-margin}
+format-prefix-foreground = ${colors.foreground}
+format-underline = #0a6cf5
+;nord 9
+format-background = #a3be8c
+
+label = %date% %time%
+
+[module/volume]
+type = internal/volume
+
+format-volume = <label-volume>
+label-volume =   %percentage%
+label-volume-background = ${colors.background-volume-nord}
+format-volume-prefix = ${hacks.module-margin}
+format-volume-suffix = ${hacks.module-margin}
+format-muted-prefix = ${hacks.module-margin}
+format-muted-suffix = ${hacks.module-margin}
+format-muted-foreground = ${colors.foreground}
+format-volume-foreground = ${colors.foreground}
+format-volume-prefix-background = ${colors.background-volume-nord}
+format-volume-suffix-background = ${colors.background-volume-nord}
+format-muted-suffix-background = ${colors.background-volume-nord}
+format-muted-prefix-background = ${colors.background-volume-nord}
+label-muted =   %percentage% 
+format-muted = <label-muted>
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 100
+background = ${colors.background-battery-nord}
+format-charging-suffix= ${hacks.module-margin}
+format-full-suffix = ${hacks.module-margin}
+format-discharging-suffix= ${hacks.module-margin}
+format-full-prefix = ${hacks.module-margin}
+format-discharging-prefix= ${hacks.module-margin}
+format-charging-prefix = ${hacks.module-margin}
+format-charging-background = ${colors.background-battery-nord}
+format-charging =  <label-charging>
+format-charging-underline = #ffb52a
+format-discharging =  <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+format-discharging-background = ${self.format-charging-background}
+format-discharging-suffix-background = ${self.background}
+format-full-prefix-foreground = ${colors.foreground}
+format-full-underline = ${self.format-charging-underline}
+format-full-prefix-background= ${self.format-charging-background}
+format-full-suffix-background= ${self.format-charging-background}
+
+[global/wm]
+margin-top = 7
+margin-bottom = 5
+
+; vim:ft=dosini
