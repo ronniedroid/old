@@ -1,8 +1,14 @@
+#make sxhkd reload its configuration files:
+
+super + Escape
+	pkill -USR1 -x sxhkd
+
+
 ##I3
 
 # Go to, move windows to workspace
-super + {_,shift +} {1,2,3,4,5,6,7,8,9}
-	i3-msg {workspace,move container to workspace} {1,2,3,4,5,6,7,8,9}
+super + {_,shift +} {1-9}
+	i3-msg {workspace,move container to workspace} {I,II,III,IV,V,VI,VII,VIII,IX}
 
 # Restart I3 inplace
 

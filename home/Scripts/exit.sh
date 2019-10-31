@@ -1,10 +1,18 @@
 #!/bin/bash
 
-MENU="dmenu -i -l 2 -p "-Exit?""
-C=$(echo -e "YES\nNO\n" | $MENU)
+MENU="rofi -dmenu -i -location 3 -width 15 -lines 2 -xoffset -10 -yoffset 35 -eh 1 -p "-Exit?""
+c=$(echo -e "YES\nNO\n" | $MENU)
 
-case "$C" in
-  YES) killall dwm & ;;
-  NO) exit 0;;
-esac
-
+if [ ${c} == YES ] 
+then
+	  if [ $(wmctrl -m | awk 'NR==1 {print $2}') == i3 ]
+	  then
+		  i3-msg exit
+	  elif [ $(wmctrl -m | awk 'NR==1 {print $2}') == berry ]
+	  then
+		  killall berry
+	  fi 
+elif [ ${c} == NO ]
+then
+	exit 0
+fi

@@ -13,7 +13,7 @@ floating_modifier $mod
 exec --no-startup-id nm-applet
 
 #Start sxhkd
-exec --no-startup-id sxhkd
+exec --no-startup-id sxhkd -c ~/.config/sxhkd/sxhkdrc
 
 #Start Nitrogen
 exec --no-startup-id nitrogen --restore
@@ -39,7 +39,7 @@ for_window [class="^.*"] border pixel 5
 
 gaps inner 10
 gaps outer -4
-#smart_gaps on
+smart_gaps on
 
 smart_borders on
 
@@ -49,3 +49,4 @@ smart_borders on
 
  # class                 border  backgr. text
  client.focused #A3BE8C #A3BE8C #A3BE8C
+
