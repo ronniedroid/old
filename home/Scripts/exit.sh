@@ -5,7 +5,7 @@ c=$(echo -e "YES\nNO\n" | $MENU)
 
 if [ ${c} == YES ] 
 then
-	  i3-msg exit
+	  qtile-cmd -o cmd -f shutdown
 
 elif [ ${c} == NO ]
 then
