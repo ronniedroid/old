@@ -20,9 +20,11 @@ window:
 
 font:
        
-        size: 8.0
+        size: 10.0
 
-
+        normal:
+                family: Cascadia Code
+                style: Regular
 
 colors:
   primary:
