@@ -2,72 +2,118 @@
 ##################### My qTile ####################
 ###################################################
 
+# Importing python/qtile libraries:
 
 import os
 import re
 import socket
 import subprocess
 import os.path
-import cairocffi
-from xdg.IconTheme import getIconPath
 from libqtile.config import Key, Screen, Group, Match, Drag, Click
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer, base
-
 from typing import List  # noqa: F401
 
+# Set Default modkey:
 mod = "mod4"
 
 keys = [
+
+    # Cahnge Focus:
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
+    # Swap places:
     Key([mod, "shift"], "h", lazy.layout.swap_left()),
     Key([mod, "shift"], "l", lazy.layout.swap_right()),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod], "w", lazy.to_screen(0)),
+    Key([mod], "y", lazy.to_screen(1)),
+    Key([mod, "shift"], "w", lazy.window.to_screen(0)),
+    Key([mod, "shift"], "y", lazy.window.to_screen(1)),
+
+
+    # Resize keys:
     Key([mod], "i", lazy.layout.grow()),
     Key([mod], "m", lazy.layout.shrink()),
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "o", lazy.layout.maximize()),
+    # Move the master pane Left/Right:
     Key([mod, "shift"], "space", lazy.layout.flip()),
+    # Toggel fullscreen on/off:
     Key([mod], "f", lazy.window.toggle_fullscreen()),
 
-    Key([mod], "Return", lazy.spawn("alacritty")),
-
-    # Toggle between different layouts as defined below
+    # Change Layout:
     Key([mod], "Tab", lazy.next_layout()),
+    # Close focused window:
     Key([mod, "shift"], "q", lazy.window.kill()),
 
+    # Restart qtile in place:
     Key([mod, "control"], "r", lazy.restart()),
+
+    # Open a run prompt:
     Key([mod], "r", lazy.spawncmd()),
 
+    # Applications/Scripts Shortcuts:
+    Key([mod], "Return", lazy.spawn("alacritty")),
     Key([mod], "p", lazy.spawn("./Scripts/pmenu.sh")),
-
     Key([mod, "shift"], "f", lazy.spawn("firefox")),
+    Key([mod, "shift"], "e", lazy.spawn("emacs")),
+    Key([mod, "shift"], "t", lazy.spawn("thunderbird")),
+    Key([mod, "shift"], "b", lazy.spawn("thunar")),
     Key([mod], "d", lazy.spawn("rofi -show run")),
+    Key([mod, "shift"], "p", lazy.spawn("./Scripts/pdfs.sh")),
 
-    #Backlight control
+    # Backlight control:
     Key([mod], "Down", lazy.spawn("light -U 5")),
     Key([mod], "Up", lazy.spawn("light -A 5")),
 
-    #Volume control
+    # Volume control:
     Key([mod], "Left", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
     Key([mod], "Right", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
 
-    #Change keyboard layout
+    # Change keyboard layout:
     Key([mod], "space", lazy.spawn("./Scripts/kbdlayout.sh")),
 ]
 
 
 groups = [
-    Group("1", label=""),
-    Group("2", matches=[Match(wm_class=["firefox"])], label=""),
-    Group("3", matches=[Match(wm_class=["code-oss"])], label=""),
-    Group("4", label=""),
-    Group("5", label=""),
+    Group(
+        "1",
+        label=""
+    ),
+    Group(
+        "2",
+        matches=[Match(wm_class=["firefox"])],
+        label=""
+    ),
+    Group(
+        "3",
+        matches=[Match(wm_class=["Emacs"])],
+        label=""
+    ),
+    Group(
+        "4",
+        matches=[Match(wm_class=["libreoffice"])],
+        label=""
+    ),
+    Group(
+        "5",
+        matches=[Match(wm_class=["Thunderbird"])],
+        label=""
+    ),
+    Group(
+        "6",
+        matches=[Match(wm_class=["code-oss"])],
+        label=""
+    ),
+    Group(
+        "7",
+        label=""
+    ),
     ]
 
 for i in groups:
@@ -80,53 +126,126 @@ for i in groups:
     ])
 
 layouts = [
-    layout.MonadTall(border_focus = "5e81ac", border_normal = "b48ead", border_width = 3, margin = 5,),
-    layout.MonadWide(border_focus = "5e81ac", border_normal = "b48ead", border_width = 3, margin = 5,),
+    layout.MonadTall(
+        border_focus = "5e81ac",
+        border_normal = "b48ead",
+        border_width = 3,
+        margin = 5,
+    ),
+    layout.MonadWide(
+        border_focus = "5e81ac",
+        border_normal = "b48ead",
+        border_width = 3,
+        margin = 5,
+    ),
 ]
 
 widget_defaults = dict(
     font='Cascadia Code',
     fontsize=14,
-    padding=3,
+    padding=4,
+    background="2e3440",
+    foreground="5e81ac",
 )
 extension_defaults = widget_defaults.copy()
 
+def get_bar():
+    return bar.Bar([
+       widget.GroupBox(
+           active = "5e81ac",
+           inactive = "b48ead",
+           this_current_screen_border = "bf616a",
+           highlight_method = "line",
+           highlight_color=["2e3440", "2e3440"],
+           center_aligned=True,
+       ),
+       widget.Prompt(
+           prompt='Run:',
+       ),
+       widget.TextBox(
+           text='|',
+           foreground="bf6a6a"
+       ),
+       widget.TaskList(
+           foreground = "2e3440",
+           border = "5e81ac",
+           fontsize = 11,
+           unfocused_border = "b48ead",
+           highlight_method = "block",
+           max_title_width=100,
+           title_width_method="uniform",
+           icon_size = 13,
+           rounded=False,
+       ),
+       widget.Systray(
+       ),
+       widget.TextBox(
+           text='|',
+           foreground="8fbcbb",
+       ),
+       widget.TextBox(
+           text='',
+           foreground="8fbcbb",
+       ),
+       widget.KeyboardLayout(
+           foreground="8fbcbb",
+       ),
+       widget.TextBox(
+           text='|',
+           foreground="ebcb8b",
+       ),
+       widget.TextBox(
+           text='',
+           foreground="ebcb8b",
+       ),
+       widget.Volume(
+           foreground="ebcb8b",
+       ),
+       widget.TextBox(
+           text='|',
+           foreground="88c0d0",
+       ),
+       widget.TextBox(
+           text='',
+           foreground="88c0d0",
+       ),
+       widget.Backlight(
+           foreground="88c0d0",
+           backlight_name="intel_backlight",
+       ),
+       widget.TextBox(
+           text='|',
+           foreground="a3be8c",
+       ),
+       widget.TextBox(
+           text='',
+           foreground="a3be8c",
+       ),
+       widget.Clock(
+           format='%a %I:%M',
+           foreground = "a3be8c",
+       ),
+       widget.TextBox(
+           text='|',
+           foreground="bf6a6a",
+       ),
+       widget.TextBox(
+           text='',
+           foreground="bf6a6a",
+       ),
+       widget.Wlan(
+           foreground="bf6a6a",
+           interface="wlp3s0",
+           format="{essid}",
+       ),
+    ], 26)
+
 
 screens = [
-    Screen(
-        top=bar.Bar(
-            [
-                widget.GroupBox(background = "2e3440", active = "5e81ac", inactive = "b48ead",
-                                this_current_screen_border = "bf616a", highlight_method = "line", highlight_color=["2e3440", "2e3440"], center_aligned=True,),
-                widget.Prompt(),
-                widget.Sep(background = "2e3440",),
-                widget.TaskList(background = "2e3440", foreground = "2e3440", border = "5e81ac",
-                                unfocused_border = "b48ead", highlight_method = "block", max_title_width=100, title_width_method="uniform", rounded=False,),
-                widget.Systray(background = "2e3440"),
-                widget.TextBox(text='', background="2e3440", foreground="8fbcbb", padding=0, fontsize=37),
-                widget.TextBox(text=' ', background="8fbcbb", foreground="2e3440", padding=2),
-                widget.KeyboardLayout(background="8fbcbb", foreground="2e3440", padding=4),
-                widget.TextBox(text='', background="8fbcbb", foreground="ebcb8b", padding=0, fontsize=37),
-                widget.TextBox(text=' ', background="ebcb8b", foreground="2e3440", padding=2),
-                widget.Volume(background="ebcb8b", foreground="2e3440", padding=4),
-                widget.TextBox(text='', background="ebcb8b", foreground="88c0d0", padding=0, fontsize=37),
-                widget.TextBox(text=' ', background="88c0d0", foreground="2e3440", padding=2),
-                widget.Backlight(background="88c0d0", foreground="2e3440", padding=4,
-                                 backlight_name="intel_backlight"),
-                widget.TextBox(text='', background="88c0d0", foreground="aebe8c", padding=0, fontsize=37),
-                widget.TextBox(text=' ', background="aebe8c", foreground="2e3440", padding=2),
-                widget.Clock(format='%a %I:%M', background = "a3be8c",
-                             foreground = "2e3440", pading=4),
-                widget.TextBox(text='', background="a3be8c", foreground="bf616a", padding=0, fontsize=37),
-                widget.TextBox(text=' ', background="bf616a", foreground="2e3440", padding=2),
-                widget.Wlan(background="bf6a6a", foreground="2e3440",
-                            padding=4, interface="wlo1", format="{essid}"),
-            ],
-            24,
-        ),
-    ),
+    Screen(top=get_bar()),
+    Screen(),
 ]
-
+            
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
