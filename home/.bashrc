@@ -21,4 +21,4 @@ alias fuck='sudo !!'
 #bind 'set show-all-if-ambiguous on'
 bind 'set completion-ignore-case on'
 
-pfetch
+PF_COL1=6 PF_COL2=7 PF_COL3=1 PF_SEP=":" pfetch

@@ -18,67 +18,70 @@ from typing import List  # noqa: F401
 # Set Default modkey:
 mod = "mod4"
 
-keys = [
+def init_keys():
+    keys = [
 
-    # Cahnge Focus:
-    Key([mod], "h", lazy.layout.left()),
-    Key([mod], "l", lazy.layout.right()),
-    Key([mod], "j", lazy.layout.down()),
-    Key([mod], "k", lazy.layout.up()),
-    # Swap places:
-    Key([mod, "shift"], "h", lazy.layout.swap_left()),
-    Key([mod, "shift"], "l", lazy.layout.swap_right()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-    Key([mod], "w", lazy.to_screen(0)),
-    Key([mod], "y", lazy.to_screen(1)),
-    Key([mod, "shift"], "w", lazy.window.to_screen(0)),
-    Key([mod, "shift"], "y", lazy.window.to_screen(1)),
+        # Cahnge Focus:
+        Key([mod], "h", lazy.layout.left()),
+        Key([mod], "l", lazy.layout.right()),
+        Key([mod], "j", lazy.layout.down()),
+        Key([mod], "k", lazy.layout.up()),
+        # Swap places:
+        Key([mod, "shift"], "h", lazy.layout.swap_left()),
+        Key([mod, "shift"], "l", lazy.layout.swap_right()),
+        Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+        Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+        Key([mod], "w", lazy.to_screen(0)),
+        Key([mod], "y", lazy.to_screen(1)),
+        Key([mod, "shift"], "w", lazy.window.to_screen(0)),
+        Key([mod, "shift"], "y", lazy.window.to_screen(1)),
+    
+    
+        # Resize keys:
+        Key([mod], "i", lazy.layout.grow()),
+        Key([mod], "m", lazy.layout.shrink()),
+        Key([mod], "n", lazy.layout.normalize()),
+        Key([mod], "o", lazy.layout.maximize()),
+        # Move the master pane Left/Right:
+        Key([mod, "shift"], "space", lazy.layout.flip()),
+        # Toggel fullscreen on/off:
+        Key([mod], "f", lazy.window.toggle_fullscreen()),
+    
+        # Change Layout:
+        Key([mod], "Tab", lazy.next_layout()),
+        # Close focused window:
+        Key([mod, "shift"], "q", lazy.window.kill()),
+    
+        # Restart qtile in place:
+        Key([mod, "control"], "r", lazy.restart()),
+    
+        # Open a run prompt:
+        Key([mod], "r", lazy.spawncmd()),
+    
+        # Applications/Scripts Shortcuts:
+        Key([mod], "Return", lazy.spawn("alacritty")),
+        Key([mod], "p", lazy.spawn("./Scripts/pmenu.sh")),
+        Key([mod, "shift"], "f", lazy.spawn("firefox")),
+        Key([mod, "shift"], "e", lazy.spawn("emacs")),
+        Key([mod, "shift"], "t", lazy.spawn("thunderbird")),
+        Key([mod, "shift"], "b", lazy.spawn("thunar")),
+        Key([mod], "d", lazy.spawn("rofi -show run")),
+        Key([mod, "shift"], "p", lazy.spawn("./Scripts/pdfs.sh")),
+    
+        # Backlight control:
+        Key([mod], "Down", lazy.spawn("light -U 5")),
+        Key([mod], "Up", lazy.spawn("light -A 5")),
+    
+        # Volume control:
+        Key([mod], "Left", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
+        Key([mod], "Right", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
+    
+        # Change keyboard layout:
+        Key([mod], "space", lazy.spawn("./Scripts/kbdlayout.sh")),
+        ]
+    return keys
 
-
-    # Resize keys:
-    Key([mod], "i", lazy.layout.grow()),
-    Key([mod], "m", lazy.layout.shrink()),
-    Key([mod], "n", lazy.layout.normalize()),
-    Key([mod], "o", lazy.layout.maximize()),
-    # Move the master pane Left/Right:
-    Key([mod, "shift"], "space", lazy.layout.flip()),
-    # Toggel fullscreen on/off:
-    Key([mod], "f", lazy.window.toggle_fullscreen()),
-
-    # Change Layout:
-    Key([mod], "Tab", lazy.next_layout()),
-    # Close focused window:
-    Key([mod, "shift"], "q", lazy.window.kill()),
-
-    # Restart qtile in place:
-    Key([mod, "control"], "r", lazy.restart()),
-
-    # Open a run prompt:
-    Key([mod], "r", lazy.spawncmd()),
-
-    # Applications/Scripts Shortcuts:
-    Key([mod], "Return", lazy.spawn("alacritty")),
-    Key([mod], "p", lazy.spawn("./Scripts/pmenu.sh")),
-    Key([mod, "shift"], "f", lazy.spawn("firefox")),
-    Key([mod, "shift"], "e", lazy.spawn("emacs")),
-    Key([mod, "shift"], "t", lazy.spawn("thunderbird")),
-    Key([mod, "shift"], "b", lazy.spawn("thunar")),
-    Key([mod], "d", lazy.spawn("rofi -show run")),
-    Key([mod, "shift"], "p", lazy.spawn("./Scripts/pdfs.sh")),
-
-    # Backlight control:
-    Key([mod], "Down", lazy.spawn("light -U 5")),
-    Key([mod], "Up", lazy.spawn("light -A 5")),
-
-    # Volume control:
-    Key([mod], "Left", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
-    Key([mod], "Right", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
-
-    # Change keyboard layout:
-    Key([mod], "space", lazy.spawn("./Scripts/kbdlayout.sh")),
-]
-
+keys = init_keys()
 
 groups = [
     Group(
@@ -106,7 +109,7 @@ groups = [
         label=""
     ),
     Group(
-        "6",
+      "6",
         matches=[Match(wm_class=["code-oss"])],
         label=""
     ),
@@ -115,6 +118,9 @@ groups = [
         label=""
     ),
     ]
+
+
+
 
 for i in groups:
     keys.extend([
@@ -166,17 +172,18 @@ def get_bar():
            text='|',
            foreground="bf6a6a"
        ),
-       widget.TaskList(
-           foreground = "2e3440",
-           border = "5e81ac",
-           fontsize = 11,
-           unfocused_border = "b48ead",
-           highlight_method = "block",
-           max_title_width=100,
-           title_width_method="uniform",
-           icon_size = 13,
-           rounded=False,
-       ),
+       #widget.TaskList(
+       #    foreground = "2e3440",
+       #    border = "5e81ac",
+       #    fontsize = 11,
+       #    unfocused_border = "b48ead",
+       #    highlight_method = "block",
+       #    max_title_width=100,
+       #    title_width_method="uniform",
+       #    icon_size = 13,
+       #    rounded=False,
+       #),
+       widget.Spacer(bar.STRETCH),
        widget.Systray(
        ),
        widget.TextBox(
@@ -189,6 +196,17 @@ def get_bar():
        ),
        widget.KeyboardLayout(
            foreground="8fbcbb",
+       ),
+       widget.TextBox(
+           text='|',
+           foreground="5e81ac",
+       ),
+       widget.TextBox(
+           text='',
+           foreground="5e81ac",
+       ),
+       widget.Battery(
+           format = '{percent:2.0%}'
        ),
        widget.TextBox(
            text='|',
@@ -238,7 +256,7 @@ def get_bar():
            interface="wlp3s0",
            format="{essid}",
        ),
-    ], 26)
+    ], 26, background="2e3440")
 
 
 screens = [
@@ -258,7 +276,7 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 main = None
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
