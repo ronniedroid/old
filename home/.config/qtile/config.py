@@ -21,7 +21,7 @@ mod = "mod4"
 def init_keys():
     keys = [
 
-        # Cahnge Focus:
+        # Change Focus:
         Key([mod], "h", lazy.layout.left()),
         Key([mod], "l", lazy.layout.right()),
         Key([mod], "j", lazy.layout.down()),
